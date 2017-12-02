@@ -1,0 +1,47 @@
+@charset "utf-8";
+/* CSS Document */
+
+.bodertop{
+	border-top: 1px solid #e7e7e7;
+}
+.solutionTxt{
+	color: #05a0b3;
+	font-weight: 300;
+	font-size: 24px;
+	
+}
+.bottom30{
+	padding-top: 30px;
+}
+.top20{
+	padding-top:20px; 
+}
+.main-panel {
+    position: relative;
+    float: right;
+    width: 100%;
+    -webkit-transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1);
+    -moz-transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1);
+    -o-transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1);
+    -ms-transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1);
+    transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1);
+    max-height: 100%;
+}
+nav.navbar.navbar-transparent.navbar-absolute {
+    position: inherit;
+}
+
+
+
+@media (min-width: 768px)
+{.modal-dialog {
+    width: 80%;
+    margin: 30px auto;
+}
+}
+
+.navbar.navbar-transparent {
+    background-color: #00000029;
+    box-shadow: none;
+    border-bottom: 0;
+}

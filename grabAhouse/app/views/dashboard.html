@@ -1,0 +1,291 @@
+
+            
+			
+			
+        <!--<-------------------------- Solutions details -------------------------------->  
+            
+            <div class="content bodertop" ng-repeat="entityType in entities" >
+                <div class="container-fluid">
+
+                  <div class="row">
+                  <div class="col-md-6"><h4 class="solutionTxt">{{entityType.name}}</h4></div>
+                  <div class="col-md-6">
+                  <a data-toggle="modal" data-target="#myModal-2" class="btn btn-primary btn-round pull-right">Add<div class="ripple-container"></div></a>
+                  </div>
+               
+                 <button type="button" class="btn btn-default" ng-click="open('lg')">open</button>
+   
+                  </div>
+
+                   <div class="row bodertop bottom30">
+
+                        <div class="col-lg-2 col-md-4 col-sm-6" ng-repeat="object in entityType.objects">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="orange">
+                                    <i class="material-icons">content_copy</i>
+                                </div>
+                                <div class="card-content">
+                                   
+                                    <p class="category">{{object.firstname}}
+                                        <small>{{object.iam}}</small>
+                                    </p>
+                                     <p class="category">{{object.gender}}</p>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <a href="#pablo">{{object.email}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        
+
+                    </div>
+                    
+                    
+                </div>
+            </div>
+
+
+
+             <!--<-------------------------- Solutions details end -------------------------------->  
+       
+     
+              
+         
+            
+            
+
+   
+
+
+
+
+    
+    <div class="modal fade" id="myModal-2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-2">
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel-2">{{entity.name}}</h4>
+                </div>
+
+                <div class="modal-body">
+
+
+<form name="myForm" class="form-horizontal" role="form" ng-submit="submitForm()">
+ <div ng-repeat="field in entity.fields">    
+  <ng-form name="form">
+    <!-- TEXT FIELDS -->
+    <div ng-if="field.type=='text'" class="form-group">
+      <label class="col-sm-2 control-label">{{field.label}}</label>
+      <div class="col-sm-6">
+        <input type="{{ field.type }}" dynamic-name="field.name" id="{{field.name}}" data-ng-model="field.data"  class="form-control" required/>
+         <!--<span ng-show="myForm.{{field.name}}.$dirty && myForm.{{field.name}}.$error.required">Required!</span>.-->
+         <span  data-ng-show=" {{'form.'+field.name+'.$dirty && form.'+field.name+'.$error.required'}}">Required!</span>
+      </div>
+    </div>
+
+    <!-- EMAIL FIELDS -->
+    <div ng-if="field.type=='email'" class="form-group">
+      <label class="col-sm-2 control-label">{{field.label}}</label>
+      <div class="col-sm-6">
+        <input type="{{ field.type }}" dynamic-name="field.name" data-ng-model="field.data" class="form-control" required/>
+         <span data-ng-show=" {{'form.'+field.name+'.$dirty && form.'+field.name+'.$error.required'}}">Required!</span>
+         <span data-ng-show=" {{'form.'+field.name+'.$dirty && form.'+field.name+'.$error.email'}}">Not email!</span>
+      </div>
+    </div>
+
+    <!-- PASSWORD FIELDS -->
+    <div ng-if="field.type=='password'" class="form-group" >
+      <label class="col-sm-2 control-label">{{field.label}}</label>
+      <div class="col-sm-6">
+        <input type="{{ field.type }}" dynamic-name="field.name" data-ng-model="field.data" ng-minlength={{field.min}} ng-maxlength={{field.max}} class="form-control" required/>
+         <span data-ng-show=" {{'form.'+field.name+'.$dirty && form.'+field.name+'.$error.required'}}">Required!</span>
+         <span data-ng-show=" {{'!form.'+field.name+'.required && (form.'+field.name+'.$error.minlength || form.'+field.name+'.$error.maxlength)' }}">Passwords must be between 8 and 20 characters.</span>
+        </div>
+    </div>
+
+    <!-- SELECT FIELDS -->
+    <div ng-if="field.type=='select'" class="form-group" >
+      <label class="col-sm-2 control-label">{{field.label}}</label>
+      <div class="col-sm-6">
+        <select data-ng-model="field.data" ng-options="option.name for option in field.options" class="form-control" required/>
+      </div>      
+    </div>
+
+    <!-- RADIO FIELDS -->
+    <div ng-if="field.type=='radio'" class="form-group">
+      <label class="col-sm-2 control-label">{{field.label}}</label>
+      <div class="col-sm-6">
+           
+        <div style="float:left" class="checkbox" ng-repeat="option in field.options" >
+                  <label >                
+            <input type="radio" data-ng-model="field.data"  name="taskGroup"  id="{{option.name}}" value="{{option.id}}">{{option.name}}
+          </label>
+                </div>
+      </div>
+    </div>
+
+    <!-- CHECKBOX FIELDS -->
+    <div ng-if="field.type=='checkbox'" class="form-group" >
+      <label class="col-sm-2 control-label">{{field.label}}</label>
+      <div class="col-sm-6">        
+               <div class="checkbox" ng-repeat="option in field.options" >
+                  <label>
+                    <input type="checkbox" data-ng-model="option.data"  name="taskGroup"  id="{{option.name}}" value="{{option.id}}" >{{option.name}}
+                  </label>
+                </div>
+      
+      </div>
+    </div>
+
+  </ng-form>
+
+ </div>
+
+
+<div class="modal-footer">
+                    <button type="button" class="btn btn-dialog" data-dismiss="modal">Cancel</button>
+                     <button  class="btn btn-dialog" ng-disabled="myForm.$invalid" type="submit" id="submit">Submit</button>
+                </div>
+  <!--<pre>{{entity|json}}</pre>-->
+ 
+       
+ </form>
+
+                               </div>
+
+                
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div><!-- modal --> 
+            
+            
+
+
+
+  <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+
+
+
+
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel-2">{{entity.name}}</h4>
+                </div>
+
+                <div class="modal-body">
+
+
+<form name="myForm" class="form-horizontal" role="form" ng-submit="submitForm()">
+ <div ng-repeat="field in entity.fields">    
+  <ng-form name="form">
+    <!-- TEXT FIELDS -->
+    <div ng-if="field.type=='text'" class="form-group">
+      <label class="col-sm-2 control-label">{{field.label}}</label>
+      <div class="col-sm-6">
+        <input type="{{ field.type }}" dynamic-name="field.name" id="{{field.name}}" data-ng-model="field.data"  class="form-control" required/>
+         <!--<span ng-show="myForm.{{field.name}}.$dirty && myForm.{{field.name}}.$error.required">Required!</span>.-->
+         <span  data-ng-show=" {{'form.'+field.name+'.$dirty && form.'+field.name+'.$error.required'}}">Required!</span>
+      </div>
+    </div>
+
+    <!-- EMAIL FIELDS -->
+    <div ng-if="field.type=='email'" class="form-group">
+      <label class="col-sm-2 control-label">{{field.label}}</label>
+      <div class="col-sm-6">
+        <input type="{{ field.type }}" dynamic-name="field.name" data-ng-model="field.data" class="form-control" required/>
+         <span data-ng-show=" {{'form.'+field.name+'.$dirty && form.'+field.name+'.$error.required'}}">Required!</span>
+         <span data-ng-show=" {{'form.'+field.name+'.$dirty && form.'+field.name+'.$error.email'}}">Not email!</span>
+      </div>
+    </div>
+
+    <!-- PASSWORD FIELDS -->
+    <div ng-if="field.type=='password'" class="form-group" >
+      <label class="col-sm-2 control-label">{{field.label}}</label>
+      <div class="col-sm-6">
+        <input type="{{ field.type }}" dynamic-name="field.name" data-ng-model="field.data" ng-minlength={{field.min}} ng-maxlength={{field.max}} class="form-control" required/>
+         <span data-ng-show=" {{'form.'+field.name+'.$dirty && form.'+field.name+'.$error.required'}}">Required!</span>
+         <span data-ng-show=" {{'!form.'+field.name+'.required && (form.'+field.name+'.$error.minlength || form.'+field.name+'.$error.maxlength)' }}">Passwords must be between 8 and 20 characters.</span>
+        </div>
+    </div>
+
+    <!-- SELECT FIELDS -->
+    <div ng-if="field.type=='select'" class="form-group" >
+      <label class="col-sm-2 control-label">{{field.label}}</label>
+      <div class="col-sm-6">
+        <select data-ng-model="field.data" ng-options="option.name for option in field.options" class="form-control" required/>
+      </div>      
+    </div>
+
+    <!-- RADIO FIELDS -->
+    <div ng-if="field.type=='radio'" class="form-group">
+      <label class="col-sm-2 control-label">{{field.label}}</label>
+      <div class="col-sm-6">
+           
+        <div style="float:left" class="checkbox" ng-repeat="option in field.options" >
+                  <label >                
+            <input type="radio" data-ng-model="field.data"  name="taskGroup"  id="{{option.name}}" value="{{option.id}}">{{option.name}}
+          </label>
+                </div>
+      </div>
+    </div>
+
+    <!-- CHECKBOX FIELDS -->
+    <div ng-if="field.type=='checkbox'" class="form-group" >
+      <label class="col-sm-2 control-label">{{field.label}}</label>
+      <div class="col-sm-6">        
+               <div class="checkbox" ng-repeat="option in field.options" >
+                  <label>
+                    <input type="checkbox" data-ng-model="option.data"  name="taskGroup"  id="{{option.name}}" value="{{option.id}}" >{{option.name}}
+                  </label>
+                </div>
+      
+      </div>
+    </div>
+
+  </ng-form>
+
+ </div>
+
+
+<div class="modal-footer">
+                    <button type="button" class="btn btn-dialog" data-dismiss="modal">Cancel</button>
+                     <button  class="btn btn-dialog" ng-disabled="myForm.$invalid" type="submit" id="submit">Submit</button>
+                </div>
+  <!--<pre>{{entity|json}}</pre>-->
+ 
+       
+ </form>
+
+                               </div>
+
+                
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+          
+          
+          
+            <ul>
+                <li ng-repeat="item in items">
+                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            Selected: <b>{{selected.item }}</b>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+
+
+    </script>

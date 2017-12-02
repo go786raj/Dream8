@@ -1,0 +1,30 @@
+{
+  "name": "dynamic-form",
+  "version": "0.0.0",
+  "dependencies": {
+    "angular": "1.5.5",
+    "bootstrap": "^3.2.0",
+    "angular-animate": "1.5.5",
+    "angular-cookies": "1.5.5",
+    "angular-resource": "1.5.5",
+    "angular-route": "1.5.5",
+    "angular-sanitize": "1.5.5",
+    "angular-touch": "1.5.5",
+    "ui-bootstrap": "^2.5.6",
+    "angular-bootstrap": "^2.5.0"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.5.5"
+  },
+  "appPath": "app",
+  "moduleName": "dynamicFormApp",
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "less/bootstrap.less",
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+    }
+  }
+}
